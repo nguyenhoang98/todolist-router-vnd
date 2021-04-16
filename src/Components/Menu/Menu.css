@@ -1,0 +1,25 @@
+.menu{
+    width:100% ;
+    height: auto;
+    background:#333;
+    border-radius: 6px;
+    overflow: hidden;
+}
+.menu ul{
+    padding:0 ;
+    margin:0 ;
+    list-style-type: none;
+}
+.menu ul li{
+    flex-basis: 50%;
+}
+.menu ul li a{
+    color:white ;
+    text-decoration: none;
+    padding:15px ;
+    display: block;
+    text-align:center ;
+}
+.red{
+  background:red;
+}

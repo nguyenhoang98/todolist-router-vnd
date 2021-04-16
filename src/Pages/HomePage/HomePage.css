@@ -1,0 +1,15 @@
+.homepage{
+    color:white ;
+    margin-top:10px ;
+}
+.homepage__list{
+    overflow: auto;
+    height: 460px;
+}
+.homepage__list__item{
+    background : white ;
+    border-radius: 6px;
+    padding:20px ;
+    margin-top:10px ;
+    color:rgb(78, 78, 78) ;
+}

@@ -1,0 +1,22 @@
+
+.searchtasks{
+    margin-top:10px ;
+    position: relative;
+}
+.searchtasks__input{
+    width:100% ;
+    height: auto;
+    padding:10px 30px ;
+    background : #ccc ;
+    border-radius: 6px ;
+    border:none ;
+    outline: none;
+    font-size: 20px;
+}
+.searchtasks__img{
+    position: absolute;
+    top:12px ;
+    left:10px ;
+    width: 20px;
+    height: 20px;
+}

@@ -1,0 +1,45 @@
+*{
+  box-sizing: border-box;
+}
+
+.app{
+  width : 375px ;
+  height: 680px ;
+  background: url("https://msmobile.com.vn/upload_images/images/hinh-nen-dep-cho-may-tinh-full-hd-2.jpg") no-repeat center ;
+  background-size:  cover;
+  border-radius: 6px;
+  margin:auto ;
+  padding:10px ;
+}
+.btn{
+  border:none; 
+  outline: none;
+  background: none;
+  color:white ;
+}
+.flex{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: red; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #b30000; 
+}
