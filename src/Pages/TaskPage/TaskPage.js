@@ -4,6 +4,7 @@ import SearchTasks from "../../Components/SearchTasks/SearchTasks";
 import TaskFormContainer from "../../Containers/TaskFormContainer/TaskFormContainer";
 import TaskListContainer from "../../Containers/TaskListContainer/TaskListContainer";
 import PaginationContainer from "../../Containers/PaginationContainer/PaginationContainer";
+import { connect } from "react-redux";
 class TaskPage extends Component {
   constructor(props) {
     super(props);
@@ -12,10 +13,22 @@ class TaskPage extends Component {
       filterPage: {
         _limit: 6,
         _page: 1,
+        _sort: "time",
+        _order: "desc",
       },
     };
     this.searchTasks = this.searchTasks.bind(this);
     this.handleChangePage = this.handleChangePage.bind(this);
+  }
+  componentWillReceiveProps(nextProps, nextState) {
+    // if (nextProps.page !== this.state.page) {
+    //   this.setState({
+    //     filterPage: {
+    //       _limit: 6,
+    //       _page: nextProps.page,
+    //     },
+    //   });
+    // }
   }
   searchTasks(data) {
     console.log(data);
@@ -28,6 +41,8 @@ class TaskPage extends Component {
       filterPage: {
         _limit: 6,
         _page: this.state.filterPage._page + i,
+        _sort: "time",
+        _order: "desc",
       },
     });
   }
@@ -46,5 +61,9 @@ class TaskPage extends Component {
     );
   }
 }
-
-export default TaskPage;
+const mapStateToProp = (state) => {
+  return {
+    page: Math.ceil(state.Tasks.length / 6),
+  };
+};
+export default connect(mapStateToProp, null)(TaskPage);

@@ -7,7 +7,6 @@ class TaskItem extends Component {
     this.state = {
       name: "",
       disable: true,
-      currentTime: new Date().getTime(),
     };
     this.isOpenFormItem = this.isOpenFormItem.bind(this);
     this.handleOnchange = this.handleOnchange.bind(this);
@@ -55,7 +54,10 @@ class TaskItem extends Component {
   }
   render() {
     const { task, onDeleteTask, onUpdateStatus } = this.props;
-    const { disable, name, currentTime } = this.state;
+    const { disable, name } = this.state;
+    let m = (new Date().getTime() - task.time) / 1000 / 60;
+    let h = (new Date().getTime() - task.time) / 1000 / 60 / 60;
+    let d = (new Date().getTime() - task.time) / 1000 / 60 / 60 / 24;
     return (
       <div className="taskitem flex">
         <div className="taskitem__name" onDoubleClick={this.isOpenFormItem}>
@@ -63,7 +65,7 @@ class TaskItem extends Component {
             <span
               style={{
                 display: "inline-block",
-                width: 200,
+                width: 120,
               }}
             >
               {task.name}
@@ -83,25 +85,33 @@ class TaskItem extends Component {
         <div className="taskitem__action">
           <span
             style={{
-              padding: 2,
+              padding: 6,
             }}
           >
-            {Math.floor((currentTime - task.time) / 1000 / 60 / 60) < 1
-              ? "Vừa xong"
-              : Math.floor((currentTime - task.time) / 1000 / 60 / 60) + "phút"}
+            {Math.floor(m) >= 60
+              ? Math.floor(h) + "giờ"
+              : Math.floor(h) >= 24
+              ? Math.floor(d) + "ngày"
+              : Math.floor(m) + "phút"}
           </span>
           <span
             style={{
               color: task.status === true ? "green" : "red",
               cursor: "pointer",
-              padding: 2,
+              padding: 6,
             }}
             onClick={() => onUpdateStatus(task)}
           >
             <i className="fa fa-check-circle-o" aria-hidden="true"></i>
           </span>
-          <span className="taskitem__close" onClick={() => onDeleteTask(task)}>
-            <i className="fa fa-times" aria-hidden="true"></i>
+          <span
+            className="taskitem__close"
+            onClick={() => onDeleteTask(task)}
+            style={{
+              color: "red",
+            }}
+          >
+            <i className="fa fa-trash" aria-hidden="true"></i>
           </span>
         </div>
       </div>

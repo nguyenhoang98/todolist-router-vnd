@@ -9,7 +9,13 @@
 .homepage__list__item{
     background : white ;
     border-radius: 6px;
-    padding:20px ;
+    padding:10px ;
     margin-top:10px ;
     color:rgb(78, 78, 78) ;
+}
+.homepage__list__item__img{
+    flex-basis: 40%;
+}
+.homepage__list__item__content{
+    flex-basis: 58%;
 }

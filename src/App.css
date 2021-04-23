@@ -10,6 +10,7 @@
   border-radius: 6px;
   margin:auto ;
   padding:10px ;
+  position: relative;
 }
 .btn{
   border:none; 
@@ -35,11 +36,11 @@
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: red; 
+  background: rgb(4, 2, 85); 
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #b30000; 
+  background:rgb(4, 2, 85); 
 }

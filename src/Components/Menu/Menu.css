@@ -1,7 +1,7 @@
 .menu{
     width:100% ;
     height: auto;
-    background:#333;
+    background:rgb(4, 2, 85);
     border-radius: 6px;
     overflow: hidden;
 }
@@ -14,9 +14,9 @@
     flex-basis: 50%;
 }
 .menu ul li a{
-    color:white ;
+    color:rgb(206, 204, 204) ;
     text-decoration: none;
-    padding:15px ;
+    padding:10px ;
     display: block;
     text-align:center ;
 }

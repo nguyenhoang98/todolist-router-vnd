@@ -6,10 +6,7 @@ class Pagination extends Component {
     super(props);
   }
   render() {
-    const { handleChangePage, filterPage, taskAll } = this.props;
-    console.log(taskAll.length);
-    if (taskAll.length % 6 === 1) {
-    }
+    const { handleChangePage, filterPage, TasksLength } = this.props;
     const { _page } = filterPage;
     console.log(_page);
     return (
@@ -17,10 +14,9 @@ class Pagination extends Component {
         <button
           className="prev"
           onClick={() => handleChangePage(-1)}
-          disabled={Number(_page) === 1}
+          disabled={_page === 1}
           style={{
-            background: Number(_page) === 1 ? "#ccc" : "",
-            color: Number(_page) === 1 ? "black" : "",
+            background: _page === 1 ? "#ccc" : "",
           }}
         >
           <i className="fa fa-arrow-left" aria-hidden="true"></i>
@@ -28,22 +24,9 @@ class Pagination extends Component {
         <button
           className="next"
           onClick={() => handleChangePage(1)}
-          disabled={
-            taskAll.length === 0 ||
-            Number(_page) === Math.ceil(taskAll.length / 6)
-          }
+          disabled={Math.ceil(TasksLength / 6) === _page}
           style={{
-            background:
-              taskAll.length === 0 ||
-              Number(_page) === Math.ceil(taskAll.length / 6)
-                ? "#ccc"
-                : "",
-
-            color:
-              taskAll.length === 0 ||
-              Number(_page) === Math.ceil(taskAll.length / 6)
-                ? "black"
-                : "",
+            background: Math.ceil(TasksLength / 6) === _page ? "#ccc" : "",
           }}
         >
           <i className="fa fa-arrow-right" aria-hidden="true"></i>

@@ -9,7 +9,6 @@ import {
   delete_task_api,
   update_status_task,
   update_task,
-  fetch_api_all_task,
 } from "../../Redux/Actions/Action";
 const url_api_tasks = "http://localhost:1111/tasks";
 class TaskListContainer extends Component {
@@ -24,7 +23,10 @@ class TaskListContainer extends Component {
     const obj = { q: q };
     const query = qs.stringify(obj);
     const filterPageQuery = qs.stringify(filterPage);
-    fetchApiTask(`${url_api_tasks}?${filterPageQuery}?${query}`);
+    console.log(`${url_api_tasks}?${filterPageQuery}`);
+    fetchApiTask(
+      `http://localhost:1111/tasks?_limit=6&_order=desc&_page=1&_sort=time`
+    );
   }
   componentWillReceiveProps(nextProps) {
     if (this.props.q !== nextProps.q) {
@@ -39,14 +41,13 @@ class TaskListContainer extends Component {
       const { fetchApiTask, q } = this.props;
       const filterPageQuery = qs.stringify(nextProps.filterPage);
       console.log(filterPageQuery);
-      fetchApiTask(`${url_api_tasks}?${filterPageQuery}?${q}`);
+      console.log(`${url_api_tasks}?${filterPageQuery}`);
+      fetchApiTask(`${url_api_tasks}?${filterPageQuery}`);
     }
   }
   handleDeleteTask(data) {
     const { deleteTask } = this.props;
     deleteTask(url_api_tasks, data.id);
-    const { fetchApiAllTasks } = this.props;
-    fetchApiAllTasks("http://localhost:1111/tasks");
   }
   handleUpdateStatus(data) {
     const { updateStatus } = this.props;
@@ -57,7 +58,12 @@ class TaskListContainer extends Component {
     updateTask(url_api_tasks, data);
   }
   render() {
-    const { tasks } = this.props;
+    let { tasks } = this.props;
+    if (tasks === null) {
+      tasks = [];
+    }
+    console.log("render");
+    console.log(tasks);
     return (
       <div>
         <TaskList>
@@ -78,8 +84,10 @@ class TaskListContainer extends Component {
   }
 }
 const mapStateToProps = (state) => {
+  console.log("abc", state.Tasks.tasks);
+  console.log(state.Tasks.length);
   return {
-    tasks: state.Tasks,
+    tasks: state.Tasks.tasks,
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -95,9 +103,6 @@ const mapDispatchToProps = (dispatch) => {
     },
     updateTask: (url_api_tasks, data) => {
       return dispatch(update_task(url_api_tasks, data));
-    },
-    fetchApiAllTasks: (url) => {
-      return dispatch(fetch_api_all_task(url));
     },
   };
 };

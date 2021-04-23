@@ -1,45 +1,14 @@
 import axiosServices from "../../AxiosServices/index";
 import * as tasksConstants from "../../Constants/index";
 
-// Gọi trả về tất cả dữ liệu của task
-
-export const fetch_api_all_task = (url) => {
-  console.log("all tasks");
-  return (dispatch) => {
-    axiosServices(url)
-      .then((res) => {
-        dispatch(fetch_api_all_task_success(res.data));
-      })
-      .catch((err) => {
-        dispatch(fetch_api_all_task_err(err));
-      });
-  };
-};
-
-export const fetch_api_all_task_success = (data) => {
-  return {
-    type: tasksConstants.FETCH_API_ALL_TASK_SUCCESS,
-    payload: {
-      data: data,
-    },
-  };
-};
-export const fetch_api_all_task_err = (err) => {
-  return {
-    type: tasksConstants.FETCH_API_TASK_ERR,
-    payload: {
-      err: err,
-    },
-  };
-};
-
 // Sử lí phần gọi api
 export const fetch_api_task = (url) => {
-  console.log(url);
   return (dispatch) => {
-    return axiosServices(url, "GET", null)
+    dispatch(fetch_api_task_success(null));
+    axiosServices(url, "GET", null)
       .then((res) => {
-        dispatch(fetch_api_task_success(res.data));
+        console.log("Hello");
+        dispatch(fetch_api_task_success(res));
       })
       .catch((err) => {
         dispatch(fetch_api_task_err(err));
@@ -47,10 +16,12 @@ export const fetch_api_task = (url) => {
   };
 };
 export const fetch_api_task_success = (data) => {
+  console.log("fetch_success");
   return {
     type: tasksConstants.FETCH_API_TASK_SUCCESS,
     payload: {
-      data: data.reverse(),
+      data: data ? data.data : null,
+      length: data ? Number(data.headers["x-total-count"]) : 0,
     },
   };
 };
@@ -67,11 +38,10 @@ export const fetch_api_task_err = (err) => {
 // sử lí phần thêm dữ liệu post api
 
 export const add_task_api = (url, data) => {
-  console.log(url);
   return (dispatch) => {
     axiosServices(url, "POST", data)
       .then((res) => {
-        dispatch(add_task_api_success(res.data));
+        dispatch(add_task_api_success(data));
       })
       .catch((err) => {
         dispatch(add_task_api_err(err));

@@ -10,7 +10,6 @@ class TaskFormContainer extends Component {
     this.state = {
       name: "",
       status: false,
-      time: new Date().getTime(),
     };
     this.handleOnchange = this.handleOnchange.bind(this);
     this.handleOnSubmit = this.handleOnSubmit.bind(this);
@@ -49,10 +48,8 @@ class TaskFormContainer extends Component {
     addTasks(url_api_tasks, {
       ...this.state,
       id: this.createID(),
-      time: this.state.time,
+      time: new Date().getTime(),
     });
-    const { fetchApiAllTasks } = this.props;
-    fetchApiAllTasks("http://localhost:1111/tasks");
     this.handleOnResetForm();
   }
 
@@ -76,6 +73,7 @@ class TaskFormContainer extends Component {
             value={name}
             onChange={this.handleOnchange}
             autoComplete="off"
+            required
           />
           <button type="submit" className="btn btn-submit taskform__submit">
             <i className="fa fa-plus" aria-hidden="true"></i>
@@ -94,9 +92,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addTasks: (url, data) => {
       return dispatch(add_task_api(url, data));
-    },
-    fetchApiAllTasks: (url) => {
-      return dispatch(fetch_api_all_task(url));
     },
   };
 };

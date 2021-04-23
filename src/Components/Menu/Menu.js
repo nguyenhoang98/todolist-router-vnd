@@ -9,7 +9,10 @@ const MenuLink = ({ label, to, actionOnlyWhenExact }) => {
       children={(props) => {
         return (
           <li className={props.match ? "red" : ""}>
-            <NavLink to={to}> {label} </NavLink>
+            <NavLink to={to} exact={actionOnlyWhenExact}>
+              {" "}
+              {label}{" "}
+            </NavLink>
           </li>
         );
       }}

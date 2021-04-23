@@ -8,18 +8,15 @@ class PaginationContainer extends Component {
   constructor(props) {
     super(props);
   }
-  componentDidMount() {
-    const { fetchApiAllTasks } = this.props;
-    fetchApiAllTasks(url);
-  }
   render() {
-    const { taskAll, handleChangePage, filterPage } = this.props;
+    const { handleChangePage, filterPage, TasksLength } = this.props;
     return (
       <div>
         <Pagination
-          taskAll={taskAll}
           handleChangePage={handleChangePage}
           filterPage={filterPage}
+          TasksLength={TasksLength}
+          s
         />
       </div>
     );
@@ -27,15 +24,11 @@ class PaginationContainer extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    taskAll: state.TaskAll,
+    TasksLength: state.Tasks.length,
   };
 };
 const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchApiAllTasks: (url) => {
-      return dispatch(fetch_api_all_task(url));
-    },
-  };
+  return {};
 };
 export default connect(
   mapStateToProps,
